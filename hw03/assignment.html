@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0107)https://cw.felk.cvut.cz/brute/data/ae/release/2023z_b4m33pal/pal_2023/evaluation/input.php?task=topologyfix -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="./assignment_files/default.css">
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+<div class="main">
+
+<h2><font color="blue">Network Topology Fix</font></h2>
+<p align="justify">
+
+
+The topology of the two separate networks, A and B, in the campus was planned to be identical.
+Both networks consist of fast servers and regular servers and the connections between them.
+The number of servers, the number of fast servers and the number of connections
+is planned to be is the same in both networks.
+Moreover the topologies of both networks is to be identical. It means, that there is
+a one-to-one mapping between the servers in A and the servers in B.  The mapping
+maps each fast server in one network to a fast server in the other network and also
+it maps each regular server in one network to a regular server in the other network.
+Furthermore, two servers <i>x</i>, and <i>y</i> in A are connected are connected if and only if
+there are other two  connected servers, <i>z</i> and <i>w</i>, in network B, and the mapping maps
+<i>x</i> to <i>z</i> and <i>y</i> to <i>w</i>.
+<br>
+
+In determining the topology only connections are relevant,
+physical location of servers and connections are nor relevant.
+
+<br>
+<br>
+
+Both networks were built gradually. First, all servers were delivered and activated
+and then, one after another, connections among particular servers were established.
+<br>
+However, when all connections in network B were completed and there was a
+last connection to be established in network A, a mistake happened.
+The delivering company made en error in coordinates of the last connection
+and instead of installing the connection in network A they installed it in network B.
+There, they made another mistake, and wrongly installed the connection
+between two, yet not connected, servers which were chosen  in effect randomly.
+Consequently, now network B contains one more connection than it should contain and
+network A contains one less connection than it should contain.
+<br><br>
+The company is going to move the wrong connection from network B to network A,
+to fix the issue.
+
+The company  analyst noticed an important feature which may simplify the fix.
+The costs of manipulating the connections at physically different locations
+in both networks may differ significantly.
+It may be cheaper to remove some other connection from network B than the improperly
+installed one and also it may cheaper to to install the last connection
+between other servers in  network A than originally planned.
+If the topologies of both networks are identical after the fix,
+there is a chance the owners of the network may still consider the solution acceptable.
+
+<br>
+
+
+
+</p><table border="0" width="800" align="center">
+   <tbody><tr>
+   <td align="center">
+   <img style="width=&quot;547px&quot;" height="400px" src="./assignment_files/img1.png">
+   <!---
+   <img style=width="547px" height= "400px" src="img1.png" />
+   -->
+
+<br><br>
+<b>Figure 1.</b> The top part shows networks A and B before the fix. Fast servers are depicted as dark nodes.
+The bottom part depicts all possible ways to fix the networks.  In each of them, one connection is removed from B and one is added to A.
+The (approximate) location of removed  connection in network B is highlighted. The added connection in network A is {1, 4} in the first four cases, and  {2, 5}  in the last two cases  (bottom right). Note that the shared networks topology resulting from the fix in those last two cases differs from the shared topology in the previous cases.
+The schemes corresponds to Example 1 below.
+
+</td>
+</tr>
+</tbody></table>
+
+
+<h3><font color="blue">The task</font></h3>
+
+<p align="justify">
+<br> You are given the topologies of both networks before the fix.
+Produce a list of all pairs of locations from where the wrong connection may be removed in network B and where
+it may be installed in network A, so that the resulting topologies of both networks are identical. 
+
+</p><hr>
+
+
+<h3><font color="blue">Input</font></h3>
+<p align="justify">
+The first input line contains three   integers <i>N</i>, <i>C</i>, <i>F</i>,  where
+<i>N</i> is the number of servers in each network,  <i>C</i> is the <i>planned</i> number of connections
+in each network, and  <i>F</i> is the number of fast servers in each network.
+The servers in each network are labeled 0, 1, 2, ..., <i>N</i>−1.
+The next line contains <i>F</i> integers, separated by spaces, representing the labels of fast  servers in network A.
+Next, there are <i>C</i>−1 lines, each line describes one existing connection between two servers in network A.
+
+The next line contains <i>F</i> integers, separated by spaces, representing the labels of fast servers in network B.
+Finally, there are <i>C</i>+1 lines, each line describes one existing connection between two servers in network B, in the same format as in network A.
+<br>
+The connections in both networks, and also each particular connection are given in arbitrary order.
+<br>
+It holds,  4 ≤ <i>N</i> ≤ 30,  <i>N</i>−1 ≤ <i>C</i> ≤ 100, 0 ≤ <i>F</i> ≤ <i>N</i>.
+<br>
+
+
+</p>
+
+<h3><font color="blue">Output</font></h3>
+<p align="justify">
+
+The output contains one or more text lines. Each line contains four integers <i>a</i>, <i>b</i>, <i>c</i>, <i>d</i>,  separated by space, which specify a connextion fix.
+The integers <i>a</i>, <i>b</i> (<i>a</i> &lt; <i>b</i>) are the labels of two servers in network A, between which a final connection may be installed.
+The integers <i>c</i>, <i>d</i> (<i>c</i> &lt; <i>d</i>) are the labels of two servers in network B, between which a  connection may be removed.
+Both networks, after the change described on the output line, share identical topology.<br>
+
+The output lines list all possible changes and are sorted in ascending lexicographical order of quadruples (<i>a</i>, <i>b</i>, <i>c</i>, <i>d</i>).
+ <br>
+There is always at least one output line. The number of output lines does not exceed 2000.
+
+
+
+</p>
+
+
+
+
+<center>
+<table width="90%">
+	<colgroup><col width="20%">
+	<col width="5%">
+	<col width="30%">
+	<col width="5%">
+	<col width="30%">
+    </colgroup><tbody><tr>
+
+
+<td valign="top">
+<h3><font color="blue">Example 1</font></h3>
+<b>Input</b><br>
+<pre>6 6 3
+1 3 5
+0 1
+1 2
+2 3
+3 4
+4 5
+1 3 5
+0 1
+1 2
+1 4
+2 3
+2 5
+3 4
+4 5
+</pre>
+
+
+<b>Output</b><br>
+<pre>1 4 2 3
+1 4 2 5
+1 4 3 4
+1 4 4 5
+2 5 1 2
+2 5 1 4
+</pre>
+
+The data of Example 1 is depicted in Figure 1.
+
+</td><td>
+
+</td><td valign="top">		
+<h3><font color="blue">Example 2</font></h3>
+<b>Input</b><br>
+<pre>7 7 1
+1
+0 1
+1 2
+1 5
+2 3
+3 4
+3 6
+4
+0 1
+0 4
+1 2
+1 3
+2 3
+4 5
+4 6
+5 6
+</pre>
+
+
+<b>Output</b><br>
+<pre>0 5 2 3
+4 6 5 6
+</pre>
+
+</td>
+
+
+
+<td valign="top">
+<h3><font color="blue">Example&nbsp;3</font></h3>
+<b>Input</b><br>
+<pre>5 6 2
+0 3
+0 1
+0 4
+1 2
+2 3
+3 4
+1 4
+0 4
+0 3
+0 1
+0 2
+1 2
+2 3
+3 4
+</pre>
+
+
+<b>Output</b><br>
+
+<pre>1 4 0 2
+1 4 0 3
+2 4 0 2
+2 4 0 3
+</pre>
+
+
+</td>
+
+    </tr>
+</tbody></table>
+</center>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<hr>
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking. The public data set is stored also in the upload system and each time a student submits a solution it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="https://cw.felk.cvut.cz/brute/data/ae/release/2023z_b4m33pal/pal_2023/evaluation/getdata.php?task=topologyfix&amp;item=datapub.zip"><b>Link to the public data set</b></a>
+</p>
+
+</div>
+
+
+</body></html>
