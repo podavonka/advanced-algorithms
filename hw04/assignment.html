@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0105)https://cw.felk.cvut.cz/brute/data/ae/release/2023z_b4m33pal/pal_2023/evaluation/input.php?task=composite -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="./assignment_files/default.css">
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+<div class="main">
+
+<h2><font color="blue">String Composite Distances</font></h2>
+<p align="justify">
+
+University stringology team is studying less traditional approaches to string processing and text search.
+<br>
+For two strings <i>S</i> and <i>T</i>, the team introduced a concept named <b>elementary similarity</b>,
+denoted byES(<i>S</i>, <i>T</i>). It is defined by the relation<br>
+
+  ES(<i>S</i>, <i>T</i>) = |<i>S</i>|, when <i>S</i> and <i>T</i> are identical strings,  and  ES(<i>S</i>, <i>T</i>) = 0, otherwise.
+
+ <br><br>
+For two nonempty strings <i>S</i> and <i>T</i>, the team  introduced a concept named <b>composite distance</b>,  
+denoted by CD(<i>S</i>, <i>T</i>),
+which is the sum of elementary similarities of all pairs of substrings, where
+the first element of the pair is a substring of <i>S</i> and the second element of the pair is a substring of <i>T</i>.
+<br>
+More formally,
+CD(<i>S</i>, <i>T</i>) = sum( ES(<i>s</i>, <i>t</i>); <i>s</i> is a substring of <i>S</i>, <i>t</i> is a substring of <i>T</i> ).
+<br><br>
+For example,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;  <i>S</i> = "010", <i>T</i> = "01".  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;  ES(<i>S</i>, <i>T</i>) = 0. <br>
+&nbsp;&nbsp;&nbsp;&nbsp;  CD(<i>S</i>, <i>T</i>) =  ES("0", "0") + ES("1", "1") + ES("0", "0") + ES("01", "01") = 1 + 1 + 1 + 2 = 5.  <br>
+Here the sum includes only non-zero terms, for better readability. For the same reason we write each substring in double quotes.
+<br>
+Note that the pair of substrings ("0", "0") appears twice in the sum, the elements in the first  pair in the sum
+are the first character in <i>S</i> and the first character in <i>T</i>, the elements in the third pair in the sum
+are the third character in <i>S</i> and the first character in <i>T</i>.
+ <br><br>
+Another example:  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;  <i>S</i> = "0101", <i>T</i> = "1010".    <br>
+&nbsp;&nbsp;&nbsp;&nbsp;  Composite distance of <i>S</i> and <i>T</i> is a sum<br>
+&nbsp;&nbsp;&nbsp;&nbsp;  CD(<i>S</i>, <i>T</i>) =  <br>
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; ES("0", "0") + ES("0", "0") + ES("0", "0") + ES("0", "0")  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;   + ES("1", "1") + ES("1", "1") + ES("1", "1") + ES("1", "1") <br>
+&nbsp;&nbsp;&nbsp;&nbsp;   + ES("01", "01") + ES("01", "01")  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;   + ES("10"," 10") + ES("10", "10") <br>
+&nbsp;&nbsp;&nbsp;&nbsp;   + ES("010", "010") + ES("101", "101")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;   = 1 + 1 + 1 + 1 + 1 + 1 + 1 + 1 + 2 + 2 + + 2 + 2 + 3 + 3 = 22. <br>
+ Again, note the repeating terms, due to the different positions of the substrings in their respective strings.
+ <br><br>
+
+After some considerations, the team decided to restrict the concept of the composite distance.
+When it is computed, possibly all substrings of all lengths in <i>S</i> and <i>T</i> have to be considered.
+As their number may be relatively large, the team added two more parametrs, <i>L</i><sub>1</sub> and <i>L</i><sub>2</sub>, to composite distance,  creating the concept of <b>restricted composite distance</b>
+of <i>S</i> and <i>T</i>. <br>
+
+Given two integers <i>L</i><sub>1</sub> ≤ <i>L</i><sub>2</sub>,
+restricted composite distance of <i>S</i> and <i>T</i>,
+denoted by RCD(<i>S</i>, <i>T</i>, <i>L</i><sub>1</sub>, <i>L</i><sub>2</sub>)
+is the sum of elementary similarities of all pairs of substrings, where
+the first element of the pair is a substring of <i>S</i> and the second element of the pair is a substring of <i>S</i>
+and the length of both elements in the is in the range  [<i>L</i><sub>1</sub> .. <i>L</i><sub>2</sub>].
+
+<br>
+For example: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;     RCD("011001", "1100", 2, 3) =  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;      ES("11","11") + ES("10","10") + ES("00","00") + ES("110","110") + ES("100","100")  <br>
+&nbsp;&nbsp;&nbsp;&nbsp;  = 2 + 2 + 2 + 3 + 3 = 12.
+<br>  <br>
+
+To compute RCD(<i>S</i>, <i>T</i>, <i>L</i><sub>1</sub>, <i>L</i><sub>2</sub>),
+the teams apllies a dictionary tree, often
+also called trie or digital tree or prefix tree,
+built over all substrings of <i>S</i>, which length is in range [<i>L</i><sub>1</sub> .. <i>L</i><sub>2</sub>].
+<br>
+Managing the tree takes time, therefore the team is inderested in more
+characterisctics of the tree, namely the number of leaves in the tree and the total
+length of all paths from the root of the tree to a leaf.
+
+
+</p><h3><font color="blue">The task</font></h3>
+
+<p align="justify">
+Given <i>S</i>, <i>T</i>, <i>L</i><sub>1</sub>, <i>L</i><sub>2</sub>, compute RCD(<i>S</i>, <i>T</i>, <i>L</i><sub>1</sub>, <i>L</i><sub>2</sub>).
+Also compute, for the dictionary tree (trie, digital tree, prefix tree) built over the dictionary of all substrings of S which length is in the range  [<i>L</i><sub>1</sub> .. <i>L</i><sub>2</sub>],  the number of the leaves  and the total length of all paths from the root of the dictionary tree (trie)  to its leaf.
+</p><hr>
+
+
+<h3><font color="blue">Input</font></h3>
+<p align="justify">
+The first input line contains four  integers <i>LS</i>, <i>LT</i>, <i>L</i><sub>1</sub>, <i>L</i><sub>2</sub>, where
+<i>LS</i> and <i>LT</i> is the length of string <i>S</i>, <i>T</i>, respectively, and
+<i>L</i><sub>1</sub> and  <i>L</i><sub>2</sub> is the third and fourth parameter of   RCD(S, T, L1, L2).
+The second and the third input line contains string <i>S</i> and <i>T</i>, repectively.  <br>
+Both <i>S</i> and <i>T</i> are composed only of characters '0' and '1'. <br>
+
+It holds,  2 ≤ |<i>S</i>|, |<i>T</i>| ≤ 10<sup>4</sup>;
+1 ≤ <i>L</i><sub>1</sub> ≤  <i>L</i><sub>2</sub> ≤  min( |<i>S</i>|, |<i>T</i>| ).
+</p>
+
+
+<h3><font color="blue">Output</font></h3>
+<p align="justify">
+
+The output contains one text line with  three integers <i>D</i>, <i>L</i>, <i>P</i>, separated by spaces.
+The value of <i>D</i> is equal to  RCD(<i>S</i>, <i>T</i>, <i>L</i><sub>1</sub>, <i>L</i><sub>2</sub>). 
+The value of <i>L</i> is equal to the number of leaves
+in a dictionary tree (trie, digital tree, prefix tree)  built over <i>S</i>. The value of  <i>P</i> refers to the same
+dictionary tree (trie, digital tree, prefix tree) and it is equal to the
+total length of all paths from the root of the tree to a leaf.
+</p>
+
+
+
+<center>
+<table width="90%">
+	<colgroup><col width="35%">
+	<col width="5%">
+	<col width="27%">
+	<col width="2%">
+	<col width="20%">
+    </colgroup><tbody><tr>
+
+
+<td valign="top">
+<h3><font color="blue">Example 1</font></h3>
+<b>Input</b><br>
+<pre>8 8 3 4
+10101010
+01010101
+</pre>
+
+
+<b>Output</b><br>
+<pre>102 2 8
+</pre>
+
+
+</td>
+
+<td valign="top">		
+<h3><font color="blue">Example 2</font></h3>
+<b>Input</b><br>
+<pre>8 8 1 8
+10101010
+01010101
+
+</pre>
+
+
+<b>Output</b><br>
+<pre>260 2 15
+</pre>
+
+</td>
+
+<td valign="top">
+</td>
+
+<td valign="top">
+<h3><font color="blue">Example&nbsp;3</font></h3>
+<b>Input</b><br>
+<pre>8 13 5 8
+10100101
+0101001001010
+</pre>
+
+
+<b>Output</b><br>
+
+<pre>68 4 26
+</pre>
+
+
+</td>
+
+    </tr>
+</tbody></table>
+</center>
+
+
+
+
+<hr>
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking. The public data set is stored also in the upload system and each time a student submits a solution it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="https://cw.felk.cvut.cz/brute/data/ae/release/2023z_b4m33pal/pal_2023/evaluation/getdata.php?task=composite&amp;item=datapub.zip"><b>Link to the public data set</b></a>
+</p>
+
+</div>
+
+
+
+
+</body></html>
