@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<!-- saved from url=(0103)https://cw.felk.cvut.cz/brute/data/ae/release/2023z_b4m33pal/pal_2023/evaluation/input.php?task=findLCG -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta http-equiv="cache-control" content="no-cache">
+  <link rel="stylesheet" type="text/css" href="./assignment_files/default.css">
+  <title>Problem Assignment BM33PAL</title>
+</head>
+<body>
+<div class="main">
+
+
+<h2><font color="blue">Finding linear congruential generators</font></h2>
+
+<p align="justify">
+A linear congruential generator (LCG) is a triple of integers (<i>A</i>, <i>C</i>, <i>M</i>) used to generate pseudorandom numbers by the formula
+<i>x</i><sub><i>n</i>+1</sub> = (<i>A</i><i>x</i><sub><i>n</i></sub> + <i>C</i>) mod <i>M</i> applied recurrently to an initial value (seed) <i>x</i><sub>0</sub>.
+</p><p>
+The Hull-Dobell Theorem says that an LCG (<i>A</i>, <i>C</i>, <i>M</i>) has full period if and only if the following holds:
+</p><ol>
+<li>
+<i>C</i> and <i>M</i> are coprimes,
+</li>
+<li>
+<i>A</i> − 1 is divisible by each prime factor of <i>M</i>,
+</li>
+<li>
+if 4 divides <i>M</i>, then 4 also divides <i>A</i> − 1.
+</li>
+</ol>
+We know that a certain LCG (<i>A</i>, <i>C</i>, <i>M</i>) with full period was used to generate <i>x</i><sub>1</sub>
+in one step from a seed <i>x</i><sub>0</sub>.
+
+In addition, we have the following information:
+
+<ul>
+<li>
+<i>M</i> has exactly <i>F</i> ≥ 1 prime factors
+(i.e., <i>M</i> = <i>p</i><sub>1</sub><sup><i>a</i><sub>1</sub></sup>...
+<i>p</i><sub><i>F</i></sub><sup><i>a</i><sub><i>F</i></sub></sup> for some distinct primes <i>p</i><sub><i>i</i></sub> and positive integers <i>a</i><sub><i>i</i></sub>),
+</li>
+<li>
+<i>M</i> ≤ <i>M</i><sub>max</sub>, where <i>M</i><sub>max</sub> is a given bound,
+</li>
+<li>
+0 ≤ <i>x</i><sub>0</sub>, <i>x</i><sub>1</sub> &lt; <i>M</i>,
+</li>
+<li>
+0 &lt; <i>C</i> &lt; <i>M</i>,
+</li>
+<li>
+1 &lt; <i>A</i> &lt; <i>M</i>,
+</li>
+<li>
+there is no integer <i>A</i>', such that 1 &lt; <i>A</i>' &lt; <i>A</i> and <i>A</i>' fulfills conditions 2. and 3. of
+the Hull-Dobell Theorem with respect to <i>M</i>.
+</li>
+</ul>
+
+<p></p>
+
+<h3><font color="blue">The task</font></h3>
+<p align="justify">
+Find all LCGs with the properties specified above that generate a given <i>x</i><sub>1</sub> from a given <i>x</i><sub>0</sub>.
+
+<br>
+<br>
+
+</p>
+
+<hr>
+
+<h3><font color="blue">Input</font></h3>
+<p align="justify">
+The input contains one line with integers <i>F</i>, <i>M</i><sub>max</sub>, <i>x</i><sub>0</sub> and <i>x</i><sub>1</sub> separated by spaces.
+The following limits hold:
+<br>
+1 ≤ <i>F</i> ≤ 8;
+2 ≤ <i>M</i><sub>max</sub> ≤ 10<sup>9</sup>;
+0 ≤ <i>x</i><sub>0</sub>, <i>x</i><sub>1</sub> &lt; <i>M</i><sub>max</sub>.
+
+
+</p>
+
+<h3><font color="blue">Output</font></h3>
+<p align="justify">
+The output consists of one line containing integer <i>G</i> which is equal to the number of feasible LCGs.
+
+</p><h3><font color="blue">Example 1</font></h3>
+<b>Input</b><br>
+<pre>2 20 7 6
+</pre>
+
+<b>Output</b><br>
+<pre>1
+</pre>
+
+There is only one feasible LCG (A = 7, C = 11, M = 18).
+We can verify that (7 × 7 + 11) mod 18 = 6.
+
+<h3><font color="blue">Example 2</font></h3>
+<b>Input</b><br>
+<pre>3 120 0 37
+</pre>
+
+<b>Output</b><br>
+<pre>2
+</pre>
+
+The two feasible LCGs are (A = 31, C = 37, M = 90) and (A = 61, C = 37, M = 120).
+
+<hr>
+<h3><font color="blue">Public data</font></h3>
+<p align="justify">
+The public data set is intended for easier debugging and approximate program correctness checking. The public data set is stored also in the upload system and each time a student submits a solution it is run on the public dataset and the program output to  stdout and stderr is available to him/her.
+<br>
+<a href="https://cw.felk.cvut.cz/brute/data/ae/release/2023z_b4m33pal/pal_2023/evaluation/getdata.php?task=findLCG&amp;item=datapub.zip"><b>Link to public data set</b></a>
+</p>
+
+</div>
+
+
+</body></html>
